@@ -48,6 +48,7 @@ class SimpleDrivingEnv(gym.Env):
         self._envStepCounter = 0
 
     def step(self, action):
+        # print("HOOOOO")
         # Feed action to the car and get observation of car's state
         if (self._isDiscrete):
             fwd = [-1, -1, -1, 0, 0, 0, 1, 1, 1]
@@ -87,6 +88,7 @@ class SimpleDrivingEnv(gym.Env):
             reward += 50
 
         ob = car_ob
+        ob = np.asarray(ob)
         return ob, reward, self.done, dict()
 
     def seed(self, seed=None):
@@ -121,6 +123,7 @@ class SimpleDrivingEnv(gym.Env):
                                            (carpos[1] - self.goal[1]) ** 2))
         car_ob = self.getExtendedObservation()
         return np.array(car_ob, dtype=np.float32)
+        # return car_ob
 
     def render(self, mode='human'):
         if mode == "fp_camera":
